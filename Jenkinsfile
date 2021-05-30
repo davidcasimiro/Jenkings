@@ -2,14 +2,10 @@ pipeline{
   agent any
 
   parameters{
-    string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prod')
     choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description:'')
     booleanParam(name: 'executeTests', defaultValue: true, description: '')
   }
 
-  tools{
-    maven 'Maven'	// Make Maven commands available in all the stages
-  }
   stages {
 	stage("build"){	  
 	  steps{
@@ -22,6 +18,7 @@ pipeline{
 	    expression{
 		params.executeTests
 	    }
+          }
 	  steps{
 	    echo "testing the application..."
 	  }
@@ -34,5 +31,6 @@ pipeline{
 	    echo "deplying version ${VERSION}"
 	  }
 	}
-  }
+    }
+  
 }
