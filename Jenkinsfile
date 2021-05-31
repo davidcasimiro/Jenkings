@@ -28,18 +28,14 @@ pipeline{
 	stage("test"){
 	  when{
 	    expression{
-		params.executeTests
+		  params.executeTests
 	    }
-            script{
-              gv.testApp()
-            }
-
-          }
-	  steps{
-            script{
-              gv.deployApp()
-            }	    
 	  }
+	  steps{
+        script{
+          gv.testApp()
+        }
+      }
 	}
 
 	stage("deploy"){
